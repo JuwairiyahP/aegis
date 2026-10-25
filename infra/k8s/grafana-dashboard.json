@@ -1,0 +1,26 @@
+{
+  "title": "AEGIS",
+  "uid": "aegis",
+  "refresh": "5s",
+  "time": {"from": "now-15m", "to": "now"},
+  "schemaVersion": 39,
+  "panels": [
+    {"type": "timeseries", "title": "Request rate (req/s)", "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
+     "targets": [{"refId": "A", "expr": "sum(rate(http_requests_total{namespace=\"aegis\"}[30s]))", "legendFormat": "req/s"}]},
+    {"type": "timeseries", "title": "p95 latency vs SLO (s)", "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8},
+     "fieldConfig": {"defaults": {"unit": "s", "custom": {"thresholdsStyle": {"mode": "line"}},
+       "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 0.25}]}}},
+     "targets": [{"refId": "A", "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"aegis\"}[30s])) by (le))", "legendFormat": "p95"}]},
+    {"type": "timeseries", "title": "CPU per pod (cores)", "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
+     "targets": [{"refId": "A", "expr": "sum by (pod)(rate(container_cpu_usage_seconds_total{namespace=\"aegis\",pod=~\"demo-.*\",container!=\"\"}[30s]))", "legendFormat": "{{pod}}"}]},
+    {"type": "timeseries", "title": "Replicas: ready vs HPA floor", "gridPos": {"x": 12, "y": 8, "w": 12, "h": 8},
+     "fieldConfig": {"defaults": {"custom": {"lineInterpolation": "stepAfter"}}},
+     "targets": [
+       {"refId": "A", "expr": "kube_deployment_status_replicas_available{namespace=\"aegis\",deployment=\"demo\"}", "legendFormat": "ready pods"},
+       {"refId": "B", "expr": "kube_horizontalpodautoscaler_spec_min_replicas{namespace=\"aegis\"}", "legendFormat": "HPA minReplicas"}]},
+    {"type": "timeseries", "title": "Predicted risk (B's model, not deployed yet)", "gridPos": {"x": 0, "y": 16, "w": 24, "h": 7},
+     "fieldConfig": {"defaults": {"min": 0, "max": 1, "custom": {"thresholdsStyle": {"mode": "line"}},
+       "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 0.6}]}}},
+     "targets": [{"refId": "A", "expr": "aegis_risk", "legendFormat": "risk"}]}
+  ]
+}
