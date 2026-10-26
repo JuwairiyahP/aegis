@@ -1,0 +1,7 @@
+run_id,scenario,peak,ramp,hold,bursts
+tr-201,train,11,180,120,1
+tr-202,train,13,180,120,1
+tr-203,train,13,150,120,1
+tr-204,train,12,150,120,1
+tr-205,train,14,180,120,1
+tr-206,train,11,120,120,1

@@ -28,4 +28,6 @@ run fl-001 2 12 60
 run fl-002 3 14 90
 run fl-003 3 16 60
 run fl-004 4 16 90
+run fl-005 2 10 90
+run fl-006 2 12 120
 echo "all floor runs done"
