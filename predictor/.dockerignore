@@ -1,0 +1,10 @@
+.venv
+data
+tests
+__pycache__
+*.pyc
+models/*/*.png
+models/*/*.csv
+models/*/*.md
+models/*/metrics.json
+.git

@@ -1,0 +1,229 @@
+{
+  "version": "v3",
+  "data_source": [
+    "prometheus-csv"
+  ],
+  "synthetic": false,
+  "training_conditions": [
+    "baseline"
+  ],
+  "evaluation_type": "held-out profile",
+  "split": {
+    "train": [
+      "fl-001",
+      "fl-003",
+      "fl-004",
+      "fl-005",
+      "tr-001",
+      "tr-002",
+      "tr-003",
+      "tr-101",
+      "tr-103",
+      "tr-107",
+      "tr-108",
+      "tr-109",
+      "tr-111",
+      "tr-112",
+      "tr-201",
+      "tr-202",
+      "tr-203",
+      "tr-204",
+      "tr-205"
+    ],
+    "val": [
+      "fl-002",
+      "fl-006",
+      "tr-102",
+      "tr-110",
+      "tr-206"
+    ],
+    "test": [
+      "ev-001",
+      "ev-002",
+      "ev-003",
+      "ev-004",
+      "ev-005",
+      "ev-006",
+      "ev-007",
+      "ev-008",
+      "ev-009",
+      "ev-010"
+    ]
+  },
+  "n_rows": {
+    "train": 1181,
+    "val": 310,
+    "test": 684
+  },
+  "n_pos": {
+    "train": 487,
+    "val": 95,
+    "test": 88
+  },
+  "best_iteration": 0,
+  "scale_pos_weight": 1.4250513347022586,
+  "model": {
+    "tau": 0.5221930146217346,
+    "val_fbeta": 0.7558139534883721,
+    "beta": 1.0,
+    "n_test_rows": 684,
+    "n_test_pos": 88,
+    "base_rate": 0.1286549707602339,
+    "pr_auc": 0.2132156716734053,
+    "tp": 15,
+    "fp": 28,
+    "fn": 73,
+    "precision": 0.3488372093023256,
+    "recall": 0.17045454545454544,
+    "f1": 0.22900763358778625,
+    "lead_time": {
+      "leads_s": [
+        90.0,
+        null,
+        35.0,
+        70.0,
+        null,
+        null
+      ],
+      "n_onsets": 6,
+      "n_evaluable": 6,
+      "n_detected": 3,
+      "detection_rate": 0.5,
+      "median_s": 70.0,
+      "mean_s": 65.0,
+      "p10_s": 42.0,
+      "startup_delay_s": 30,
+      "actionable_rate": 0.5,
+      "sufficient_heldout_breaches": true
+    },
+    "false_alarms": {
+      "alarm_episodes": 5,
+      "false_episodes": 2,
+      "false_per_hour": 2.1052631578947367
+    }
+  },
+  "baselines": {
+    "reactive: p95/SLO": {
+      "tau": 0.094456,
+      "val_fbeta": 0.47146401985111663,
+      "beta": 1.0,
+      "n_test_rows": 684,
+      "n_test_pos": 88,
+      "base_rate": 0.1286549707602339,
+      "pr_auc": 0.3250718546228971,
+      "tp": 49,
+      "fp": 160,
+      "fn": 39,
+      "precision": 0.23444976076555024,
+      "recall": 0.5568181818181818,
+      "f1": 0.32996632996632996,
+      "lead_time": {
+        "leads_s": [
+          120.0,
+          35.0,
+          100.0,
+          120.0,
+          50.0,
+          90.0
+        ],
+        "n_onsets": 6,
+        "n_evaluable": 6,
+        "n_detected": 6,
+        "detection_rate": 1.0,
+        "median_s": 95.0,
+        "mean_s": 85.83333333333333,
+        "p10_s": 42.5,
+        "startup_delay_s": 30,
+        "actionable_rate": 1.0,
+        "sufficient_heldout_breaches": true
+      },
+      "false_alarms": {
+        "alarm_episodes": 38,
+        "false_episodes": 31,
+        "false_per_hour": 32.631578947368425
+      }
+    },
+    "reactive: CPU per replica": {
+      "tau": 0.0,
+      "val_fbeta": 0.46913580246913583,
+      "beta": 1.0,
+      "n_test_rows": 684,
+      "n_test_pos": 88,
+      "base_rate": 0.1286549707602339,
+      "pr_auc": 0.3181128694958255,
+      "tp": 88,
+      "fp": 596,
+      "fn": 0,
+      "precision": 0.1286549707602339,
+      "recall": 1.0,
+      "f1": 0.22797927461139894,
+      "lead_time": {
+        "leads_s": [
+          120.0,
+          35.0,
+          100.0,
+          120.0,
+          120.0,
+          120.0
+        ],
+        "n_onsets": 6,
+        "n_evaluable": 6,
+        "n_detected": 6,
+        "detection_rate": 1.0,
+        "median_s": 120.0,
+        "mean_s": 102.5,
+        "p10_s": 67.5,
+        "startup_delay_s": 30,
+        "actionable_rate": 1.0,
+        "sufficient_heldout_breaches": true
+      },
+      "false_alarms": {
+        "alarm_episodes": 16,
+        "false_episodes": 10,
+        "false_per_hour": 10.526315789473685
+      }
+    },
+    "reactive: RPS per replica": {
+      "tau": 0.6400853333333333,
+      "val_fbeta": 0.4702970297029703,
+      "beta": 1.0,
+      "n_test_rows": 684,
+      "n_test_pos": 88,
+      "base_rate": 0.1286549707602339,
+      "pr_auc": 0.2821621710554322,
+      "tp": 86,
+      "fp": 596,
+      "fn": 2,
+      "precision": 0.12609970674486803,
+      "recall": 0.9772727272727273,
+      "f1": 0.22337662337662337,
+      "lead_time": {
+        "leads_s": [
+          120.0,
+          35.0,
+          100.0,
+          120.0,
+          120.0,
+          120.0
+        ],
+        "n_onsets": 6,
+        "n_evaluable": 6,
+        "n_detected": 6,
+        "detection_rate": 1.0,
+        "median_s": 120.0,
+        "mean_s": 102.5,
+        "p10_s": 67.5,
+        "startup_delay_s": 30,
+        "actionable_rate": 1.0,
+        "sufficient_heldout_breaches": true
+      },
+      "false_alarms": {
+        "alarm_episodes": 15,
+        "false_episodes": 10,
+        "false_per_hour": 10.526315789473685
+      }
+    }
+  },
+  "cv": null,
+  "min_heldout_onsets_rule_of_thumb": 5
+}

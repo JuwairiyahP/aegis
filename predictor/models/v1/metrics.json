@@ -1,0 +1,304 @@
+{
+  "version": "v1",
+  "data_source": [
+    "prometheus-csv"
+  ],
+  "synthetic": false,
+  "training_conditions": [
+    "baseline"
+  ],
+  "evaluation_type": "held-out runs from the SAME profile family (not a held-out profile)",
+  "split": {
+    "train": [
+      "fl-001",
+      "fl-003",
+      "tr-101",
+      "tr-107",
+      "tr-108",
+      "tr-110",
+      "tr-111",
+      "tr-112"
+    ],
+    "val": [
+      "fl-004",
+      "tr-001",
+      "tr-002",
+      "tr-109"
+    ],
+    "test": [
+      "fl-002",
+      "tr-003",
+      "tr-102",
+      "tr-103"
+    ]
+  },
+  "n_rows": {
+    "train": 441,
+    "val": 210,
+    "test": 256
+  },
+  "n_pos": {
+    "train": 224,
+    "val": 133,
+    "test": 96
+  },
+  "best_iteration": 34,
+  "scale_pos_weight": 0.96875,
+  "model": {
+    "tau": 0.09342921525239944,
+    "val_fbeta": 0.823529411764706,
+    "beta": 1.0,
+    "n_test_rows": 256,
+    "n_test_pos": 96,
+    "base_rate": 0.375,
+    "pr_auc": 0.8026292670936896,
+    "tp": 96,
+    "fp": 112,
+    "fn": 0,
+    "precision": 0.46153846153846156,
+    "recall": 1.0,
+    "f1": 0.631578947368421,
+    "lead_time": {
+      "leads_s": [
+        120.0,
+        120.0,
+        120.0,
+        120.0
+      ],
+      "n_onsets": 5,
+      "n_evaluable": 4,
+      "n_detected": 4,
+      "detection_rate": 1.0,
+      "median_s": 120.0,
+      "mean_s": 120.0,
+      "p10_s": 120.0,
+      "startup_delay_s": 30,
+      "actionable_rate": 1.0,
+      "sufficient_heldout_breaches": false
+    },
+    "false_alarms": {
+      "alarm_episodes": 19,
+      "false_episodes": 15,
+      "false_per_hour": 42.1875
+    }
+  },
+  "baselines": {
+    "reactive: p95/SLO": {
+      "tau": 0.09344,
+      "val_fbeta": 0.7755102040816326,
+      "beta": 1.0,
+      "n_test_rows": 256,
+      "n_test_pos": 96,
+      "base_rate": 0.375,
+      "pr_auc": 0.37568803428421765,
+      "tp": 96,
+      "fp": 155,
+      "fn": 0,
+      "precision": 0.38247011952191234,
+      "recall": 1.0,
+      "f1": 0.5533141210374639,
+      "lead_time": {
+        "leads_s": [
+          120.0,
+          120.0,
+          120.0,
+          120.0
+        ],
+        "n_onsets": 5,
+        "n_evaluable": 4,
+        "n_detected": 4,
+        "detection_rate": 1.0,
+        "median_s": 120.0,
+        "mean_s": 120.0,
+        "p10_s": 120.0,
+        "startup_delay_s": 30,
+        "actionable_rate": 1.0,
+        "sufficient_heldout_breaches": false
+      },
+      "false_alarms": {
+        "alarm_episodes": 8,
+        "false_episodes": 4,
+        "false_per_hour": 11.25
+      }
+    },
+    "reactive: CPU per replica": {
+      "tau": 0.0,
+      "val_fbeta": 0.7755102040816326,
+      "beta": 1.0,
+      "n_test_rows": 256,
+      "n_test_pos": 96,
+      "base_rate": 0.375,
+      "pr_auc": 0.3400635551140388,
+      "tp": 96,
+      "fp": 160,
+      "fn": 0,
+      "precision": 0.375,
+      "recall": 1.0,
+      "f1": 0.5454545454545454,
+      "lead_time": {
+        "leads_s": [
+          120.0,
+          120.0,
+          120.0,
+          120.0
+        ],
+        "n_onsets": 5,
+        "n_evaluable": 4,
+        "n_detected": 4,
+        "detection_rate": 1.0,
+        "median_s": 120.0,
+        "mean_s": 120.0,
+        "p10_s": 120.0,
+        "startup_delay_s": 30,
+        "actionable_rate": 1.0,
+        "sufficient_heldout_breaches": false
+      },
+      "false_alarms": {
+        "alarm_episodes": 8,
+        "false_episodes": 4,
+        "false_per_hour": 11.25
+      }
+    },
+    "reactive: RPS per replica": {
+      "tau": 0.48000475,
+      "val_fbeta": 0.7777777777777778,
+      "beta": 1.0,
+      "n_test_rows": 256,
+      "n_test_pos": 96,
+      "base_rate": 0.375,
+      "pr_auc": 0.3484365968667718,
+      "tp": 96,
+      "fp": 160,
+      "fn": 0,
+      "precision": 0.375,
+      "recall": 1.0,
+      "f1": 0.5454545454545454,
+      "lead_time": {
+        "leads_s": [
+          120.0,
+          120.0,
+          120.0,
+          120.0
+        ],
+        "n_onsets": 5,
+        "n_evaluable": 4,
+        "n_detected": 4,
+        "detection_rate": 1.0,
+        "median_s": 120.0,
+        "mean_s": 120.0,
+        "p10_s": 120.0,
+        "startup_delay_s": 30,
+        "actionable_rate": 1.0,
+        "sufficient_heldout_breaches": false
+      },
+      "false_alarms": {
+        "alarm_episodes": 8,
+        "false_episodes": 4,
+        "false_per_hour": 11.25
+      }
+    }
+  },
+  "cv": {
+    "n_runs": 16,
+    "beta": 1.0,
+    "skipped_folds": [],
+    "scorers": {
+      "XGBoost": {
+        "n_folds": 16,
+        "n_rows": 907,
+        "n_pos": 453,
+        "base_rate": 0.4994487320837927,
+        "pooled_pr_auc": 0.8622355909329857,
+        "per_run_pr_auc_median": 0.9650545005689877,
+        "precision": 0.7864271457085829,
+        "recall": 0.869757174392936,
+        "n_onsets_evaluable": 24,
+        "n_detected": 22,
+        "detection_rate": 0.9166666666666666,
+        "median_lead_s": 120.0,
+        "actionable_rate": 0.9166666666666666,
+        "false_alarm_episodes": 6,
+        "alarm_episodes": 27,
+        "false_per_hour": 4.762954796030871,
+        "sufficient_onsets": true
+      },
+      "XGBoost (per-replica features only)": {
+        "n_folds": 16,
+        "n_rows": 907,
+        "n_pos": 453,
+        "base_rate": 0.4994487320837927,
+        "pooled_pr_auc": 0.8515406907293487,
+        "per_run_pr_auc_median": 0.9388822349897614,
+        "precision": 0.7525562372188139,
+        "recall": 0.8123620309050773,
+        "n_onsets_evaluable": 24,
+        "n_detected": 22,
+        "detection_rate": 0.9166666666666666,
+        "median_lead_s": 120.0,
+        "actionable_rate": 0.9166666666666666,
+        "false_alarm_episodes": 13,
+        "alarm_episodes": 32,
+        "false_per_hour": 10.31973539140022,
+        "sufficient_onsets": true
+      },
+      "reactive: p95/SLO": {
+        "n_folds": 16,
+        "n_rows": 907,
+        "n_pos": 453,
+        "base_rate": 0.4994487320837927,
+        "pooled_pr_auc": 0.4688950805009386,
+        "per_run_pr_auc_median": 0.5345794762359353,
+        "precision": 0.4955555555555556,
+        "recall": 0.9845474613686535,
+        "n_onsets_evaluable": 24,
+        "n_detected": 24,
+        "detection_rate": 1.0,
+        "median_lead_s": 120.0,
+        "actionable_rate": 1.0,
+        "false_alarm_episodes": 15,
+        "alarm_episodes": 40,
+        "false_per_hour": 11.907386990077178,
+        "sufficient_onsets": true
+      },
+      "reactive: CPU per replica": {
+        "n_folds": 16,
+        "n_rows": 907,
+        "n_pos": 453,
+        "base_rate": 0.4994487320837927,
+        "pooled_pr_auc": 0.4526731796676148,
+        "per_run_pr_auc_median": 0.3989074580759787,
+        "precision": 0.4994487320837927,
+        "recall": 1.0,
+        "n_onsets_evaluable": 24,
+        "n_detected": 24,
+        "detection_rate": 1.0,
+        "median_lead_s": 120.0,
+        "actionable_rate": 1.0,
+        "false_alarm_episodes": 15,
+        "alarm_episodes": 39,
+        "false_per_hour": 11.907386990077178,
+        "sufficient_onsets": true
+      },
+      "reactive: RPS per replica": {
+        "n_folds": 16,
+        "n_rows": 907,
+        "n_pos": 453,
+        "base_rate": 0.4994487320837927,
+        "pooled_pr_auc": 0.4680528469039672,
+        "per_run_pr_auc_median": 0.41814440518271323,
+        "precision": 0.49158249158249157,
+        "recall": 0.9668874172185431,
+        "n_onsets_evaluable": 24,
+        "n_detected": 24,
+        "detection_rate": 1.0,
+        "median_lead_s": 120.0,
+        "actionable_rate": 1.0,
+        "false_alarm_episodes": 15,
+        "alarm_episodes": 39,
+        "false_per_hour": 11.907386990077178,
+        "sufficient_onsets": true
+      }
+    }
+  },
+  "min_heldout_onsets_rule_of_thumb": 5
+}
