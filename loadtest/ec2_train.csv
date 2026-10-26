@@ -1,0 +1,15 @@
+run_id,scenario,peak,ramp,hold,bursts
+et-001,train,30,30,120,1
+et-002,train,30,60,120,1
+et-003,train,30,120,120,1
+et-004,train,38,30,120,1
+et-005,train,38,60,120,1
+et-006,train,38,120,120,1
+et-007,train,46,30,120,1
+et-008,train,46,60,120,1
+et-009,train,46,120,120,1
+et-010,train,54,30,120,1
+et-011,train,54,60,120,1
+et-012,train,54,120,120,1
+et-013,train,34,180,120,1
+et-014,train,50,180,120,1

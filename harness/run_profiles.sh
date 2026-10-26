@@ -14,7 +14,7 @@ CSV=${1:?usage: harness/run_profiles.sh PROFILES.csv}
 URL=${URL:-http://localhost:8080/work}
 NS=aegis
 DEPLOY=demo
-LOG=harness/runs.csv
+LOG=${LOG:-harness/runs.csv}
 mkdir -p harness/k6
 [ -f "$LOG" ] || echo "run_id,scenario,peak,ramp,hold,bursts,start_utc,end_utc,start_unix,end_unix,dropped_iterations" > "$LOG"
 
