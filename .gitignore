@@ -1,8 +1,11 @@
-__pycache__/
-*.pyc
-.venv/
-*.tfstate*
-.terraform/
+*.log
 *.parquet
-data/
+*.pyc
+*.tfstate*
+*:Zone.Identifier
 .env
+.terraform/
+.venv/
+__pycache__/
+data/
+harness/k6/

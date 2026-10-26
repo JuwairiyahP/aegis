@@ -44,7 +44,7 @@ resource "aws_security_group" "aegis" {
     cidr_blocks = ["${var.my_ip}/32"]
   }
   ingress {
-    description = "node <-> loadgen (HTTP, K8s API, Prometheus)"
+    description = "node to loadgen (HTTP, K8s API, Prometheus)"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
