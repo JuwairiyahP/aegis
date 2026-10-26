@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: predictor
-        image: aegis-predictor:v1
+        image: aegis-predictor:v3
         imagePullPolicy: IfNotPresent
         ports: [{name: http, containerPort: 8000}]
         env: [{name: PROM_URL, value: "http://mon-kube-prometheus-stack-prometheus.monitoring.svc:9090"}]
@@ -46,7 +46,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - {name: RISK_URL, value: "http://predictor.aegis.svc/risk"}
-        - {name: TAU, value: "0.6"}
+        - {name: TAU, value: "auto"}
         - {name: COOLDOWN, value: "60"}
         - {name: BOOST_TTL, value: "180"}
         - {name: POLL_SECONDS, value: "10"}
