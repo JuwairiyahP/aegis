@@ -20,6 +20,7 @@ import os
 import time
 from contextlib import asynccontextmanager
 
+import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import PlainTextResponse
@@ -31,6 +32,15 @@ from .prom_client import PromClient, PromError
 
 LOOKBACK_S = max(WINDOWS_S) + 30  # a little more than the longest window
 STALE_AFTER_S = 60                # drop aegis_risk from /metrics if older than this
+
+
+def _num(x, scale=1.0, nd=3):
+    """JSON-safe number: NaN/inf (e.g. no traffic -> no p95) becomes None."""
+    try:
+        v = float(x) * scale
+    except (TypeError, ValueError):
+        return None
+    return round(v, nd) if np.isfinite(v) else None
 
 
 class RiskPredictor:
@@ -77,11 +87,11 @@ class RiskPredictor:
             "risk": risk,
             "ts": last.index[-1].strftime("%Y-%m-%dT%H:%M:%SZ"),
             "model_version": self.version,
-            "in_breach": bool(row["p95"] > self.meta["slo_s"]),
+            "in_breach": bool(np.nan_to_num(row["p95"]) > self.meta["slo_s"]),
             "threshold": self.meta["threshold"],
-            "inputs": {"p95_ms": round(float(row["p95"]) * 1000, 1),
-                       "rps": round(float(row["rps"]), 2),
-                       "replicas": None if pd.isna(row["reps"]) else float(row["reps"])},
+            "inputs": {"p95_ms": _num(row["p95"], 1000, 1),
+                       "rps": _num(row["rps"], 1, 2),
+                       "replicas": _num(row["reps"], 1, 1)},
         }
 
     def metrics_text(self, now: float | None = None) -> str:
