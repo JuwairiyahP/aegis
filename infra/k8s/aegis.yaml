@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: predictor
-        image: aegis-predictor:v3
+        image: aegis-predictor:ec2-v1
         imagePullPolicy: IfNotPresent
         ports: [{name: http, containerPort: 8000}]
         env: [{name: PROM_URL, value: "http://mon-kube-prometheus-stack-prometheus.monitoring.svc:9090"}]

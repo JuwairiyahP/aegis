@@ -25,6 +25,10 @@ def clean_raw(raw: pd.DataFrame) -> pd.DataFrame:
     df = raw.reindex(columns=list(RAW_COLS)).astype(float).sort_index()
     idx = pd.date_range(df.index[0], df.index[-1], freq=f"{STEP_S}s")
     df = df.reindex(idx)
+    # A short gap in p95 usually means NO request completed (the service is saturated),
+    # not that it is idle: carry the last latency forward for up to 30 s (causal ffill),
+    # then treat longer gaps as "no traffic" -> 0.
+    df["p95"] = df["p95"].ffill(limit=6)
     for c in ("p95", "rps", "err", "cpu"):
         df[c] = df[c].fillna(0.0)
     df["reps"] = df["reps"].ffill()
