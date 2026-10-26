@@ -2,7 +2,7 @@
 # Runs ON THE LOADGEN instance. Deploys monitoring + AEGIS onto the K3s node and
 # prepares the harness. Usage:  NODE_PRIV=<node private ip> bash setup_loadgen.sh
 set -euo pipefail
-: "${NODE_PRIV:?set NODE_PRIV to the node's private IP}"
+: "${NODE_PRIV:?set NODE_PRIV to the node private IP}"
 cd ~
 [ -d aegis ] || git clone https://github.com/JuwairiyahP/aegis.git
 cd aegis && git pull -q
