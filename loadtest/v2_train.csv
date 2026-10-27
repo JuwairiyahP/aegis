@@ -1,0 +1,15 @@
+run_id,scenario,condition,base,calm,peak,ramp,hold,bursts,gap,floor
+ns-001,train,hpa,4,300,4,60,300,1,150,1
+ns-002,train,hpa,8,300,8,60,300,1,150,1
+ns-003,train,hpa,4,360,16,120,120,1,150,1
+ns-004,train,hpa,2,300,20,90,120,1,150,1
+rs-001,train,hpa,4,300,32,60,120,1,150,1
+rs-002,train,hpa,6,360,36,200,120,1,150,1
+rs-003,train,hpa,2,420,40,120,120,1,150,1
+rs-004,train,hpa,8,240,50,240,120,1,150,1
+rs-005,train,hpa,4,360,54,100,120,1,150,1
+rs-006,train,hpa,4,300,38,90,90,2,240,1
+rs-007,train,hpa,6,420,48,130,90,2,300,1
+fs-001,train,floor,4,300,36,90,120,1,150,2
+fs-002,train,floor,6,300,50,120,120,1,150,3
+fs-003,train,floor,6,300,6,60,300,1,150,4

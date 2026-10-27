@@ -16,7 +16,7 @@ STARTUP_DELAY_S = 30       # pod readiness delay used in the main experiment
 RAW_COLS = ("p95", "rps", "err", "cpu", "reps")
 
 # Never use these as model inputs: they are labels / bookkeeping.
-LABEL_COLS = ("in_breach", "onset", "y", "censored", "warm", "usable")
+LABEL_COLS = ("in_breach", "onset", "y", "censored", "warm", "usable", "unforeseeable", "pre_surge")
 
 
 @dataclass(frozen=True)

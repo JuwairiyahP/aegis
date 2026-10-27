@@ -9,7 +9,7 @@ Q = {
     "replicas":   'kube_deployment_status_replicas_available{namespace="aegis",deployment="demo"}',
     "hpa_min":    'kube_horizontalpodautoscaler_spec_min_replicas{namespace="aegis",horizontalpodautoscaler="demo"}',
 }
-META = ["run_id", "scenario", "peak", "ramp", "hold", "bursts"]
+META = ["run_id", "scenario", "condition", "base", "calm", "peak", "ramp", "hold", "bursts", "gap", "floor"]
 
 def query_range(prom, expr, start, end, step):
     url = prom.rstrip("/") + "/api/v1/query_range?" + urllib.parse.urlencode(

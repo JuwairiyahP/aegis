@@ -19,9 +19,48 @@ def prepare_run(run: RunData, slo_s: float = SLO_S, horizon_s: int = HORIZON_S,
     warm = feats.notna().all(axis=1)
     labels = label_run(raw["p95"], warm, slo_s, horizon_s, step_s)
     df = pd.concat([feats, labels], axis=1)
+    df = mask_unforeseeable(df, run.meta.get("profile") or {}, horizon_s, step_s)
     df["p95_s"] = raw["p95"]
     df["run_id"] = run.run_id
     df["scenario"] = run.scenario
+    return df
+
+
+def surge_starts(prof: dict) -> list[float]:
+    """Seconds after run start at which each load surge begins (loadtest/ramp.js schedule)."""
+    if not prof or prof.get("ramp") is None or prof.get("peak") is None:
+        return []
+    if prof.get("base") is not None and prof["peak"] <= prof["base"]:
+        return []                                   # flat run: no surge
+    calm, ramp = float(prof.get("calm", 180)), float(prof["ramp"])
+    hold, down = float(prof.get("hold", 120)), float(prof.get("down", 60))
+    gap, n = float(prof.get("gap", 150)), int(prof.get("bursts", 1) or 1)
+    return [calm + b * (ramp + hold + down + gap) for b in range(n)]
+
+
+def mask_unforeseeable(df: pd.DataFrame, prof: dict, horizon_s: int, step_s: int) -> pd.DataFrame:
+    """A positive label is UNFORESEEABLE if, at time t, the surge that causes the breach has not
+    started yet: nothing in the telemetry can announce it, so training on it only teaches the
+    model the experiment's schedule (e.g. 'calm on 1 pod -> breach soon'). Such rows are
+    excluded from training and evaluation, like censored rows.
+    pre_surge marks every row before the first surge (used to measure spurious alarms)."""
+    df = df.copy()
+    t = (df.index - df.index[0]).total_seconds().to_numpy()
+    starts = np.array(surge_starts(prof))
+    df["pre_surge"] = (t < starts.min()) if len(starts) else np.ones(len(df), bool)
+    unf = np.zeros(len(df), bool)
+    if len(starts):
+        onset_t = t[df["onset"].to_numpy()]
+        y = df["y"].to_numpy().astype(bool)
+        for i in np.where(y)[0]:
+            nxt = onset_t[(onset_t > t[i]) & (onset_t <= t[i] + horizon_s)]
+            if len(nxt):
+                cause = starts[starts <= nxt[0]]
+                s0 = cause.max() if len(cause) else None
+                if s0 is None or t[i] < s0:
+                    unf[i] = True
+    df["unforeseeable"] = unf
+    df["usable"] = df["usable"] & ~df["unforeseeable"]
     return df
 
 

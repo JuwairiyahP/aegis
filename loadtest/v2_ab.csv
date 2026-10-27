@@ -1,0 +1,13 @@
+run_id,scenario,condition,base,calm,peak,ramp,hold,bursts,gap,floor
+yb-001,eval,hpa,4,240,44,160,120,1,150,1
+ya-001,aegis,aegis,4,240,44,160,120,1,150,1
+ys-001,static,static,4,240,44,160,120,1,150,4
+ya-002,aegis,aegis,4,240,44,160,120,1,150,1
+ys-002,static,static,4,240,44,160,120,1,150,4
+yb-002,eval,hpa,4,240,44,160,120,1,150,1
+ys-003,static,static,4,240,44,160,120,1,150,4
+yb-003,eval,hpa,4,240,44,160,120,1,150,1
+ya-003,aegis,aegis,4,240,44,160,120,1,150,1
+yb-004,eval,hpa,4,240,44,160,120,1,150,1
+ya-004,aegis,aegis,4,240,44,160,120,1,150,1
+ys-004,static,static,4,240,44,160,120,1,150,4

@@ -49,7 +49,16 @@ def convert_file(path: Path, out_dir, condition: str = "baseline",
     scen = str(first["scenario"]).lower() if "scenario" in df.columns else ""
     is_eval = scen == "eval" or "eval" in path.stem.lower() or path.stem.lower().startswith("ev-")
     prof = {k: (None if pd.isna(first[k]) else float(first[k]))
-            for k in ("peak", "ramp", "hold", "bursts") if k in df.columns}
+            for k in ("base", "calm", "peak", "ramp", "hold", "bursts", "gap", "floor")
+            if k in df.columns and not isinstance(first[k], str)}
+    if prof.get("ramp") is not None:          # defaults of loadtest/ramp.js
+        prof.setdefault("calm", 180.0); prof.setdefault("bursts", 1.0)
+        prof.setdefault("gap", 150.0); prof.setdefault("down", 60.0)
+        for k in ("calm", "bursts", "gap"):
+            if prof.get(k) is None:
+                prof[k] = {"calm": 180.0, "bursts": 1.0, "gap": 150.0}[k]
+    if "condition" in df.columns and isinstance(first["condition"], str):
+        condition = first["condition"]
     meta = dict(scenario="eval" if is_eval else "train", source="prometheus-csv",
                 condition=condition, seed=0, startup_delay_s=startup_delay_s, slo_s=SLO_S,
                 step_s=STEP_S, started_at=str(raw.index[0]), ended_at=str(raw.index[-1]),
